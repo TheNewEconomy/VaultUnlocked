@@ -14,7 +14,7 @@
 	<artifactId>VaultUnlocked</artifactId>
 	<version>${api.version}.1</version>
 	<name>VaultUnlocked</name>
-	<url>https://dev.bukkit.org/projects/vault</url>
+	<url>https://modrinth.com/plugin/vaultunlocked</url>
 	<description>VaultUnlocked is a Chat, Permissions &amp; Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.</description>
 
 
@@ -54,23 +54,18 @@
 
 	<distributionManagement>
 		<repository>
-			<id>codemc-releases</id>
-			<url>https://repo.codemc.io/repository/maven-releases/</url>
+			<id>creatorfromhell-repo</id>
+			<url>https://repo.codemc.io/repository/creatorfromhell/</url>
 		</repository>
-		<snapshotRepository>
-			<id>codemc-snapshots</id>
-			<url>https://repo.codemc.io/repository/maven-snapshots/</url>
-		</snapshotRepository>
 	</distributionManagement>
-
 	<repositories>
 		<repository>
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
 		</repository>
 		<repository>
-			<id>codemc-repo</id>
-			<url>https://repo.codemc.org/repository/maven-public</url>
+			<id>creatorfromhell-repo</id>
+			<url>https://repo.codemc.io/repository/creatorfromhell/</url>
 		</repository>
 		<repository>
 			<id>placeholderapi</id>
@@ -105,13 +100,14 @@
 
 	<build>
 		<defaultGoal>clean install</defaultGoal>
-		<sourceDirectory>src/</sourceDirectory>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
-				<directory>${project.basedir}</directory>
+				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
 					<include>plugin.yml</include>
+                    <include>license.txt</include>
 				</includes>
 			</resource>
 		</resources>

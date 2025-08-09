@@ -1,8 +1,8 @@
-name: Vault
-version: 2.15.1
-description: A PR-friendly version of Vault; Where PRs are actually accepted.
+name: ${name}
+version: ${version}
+description: ${description}
 authors: [cereal, Sleaker, mung3r, creatorfromhell]
-website: https://tnemc.net
+website: ${url}
 api-version: 1.13
 folia-supported: true
 
