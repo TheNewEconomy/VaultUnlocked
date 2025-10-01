@@ -125,3 +125,6 @@ If a currency contains spaces or symbols, encode them:
 
 ## 2.15.1
 - Fixed issue where the softdepend for PlaceholderAPI was missing causing a console message.
+
+## 2.16.0
+- Added support for MC 1.21.9

@@ -6,13 +6,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<bukkitVersion>1.13.1-R0.1-SNAPSHOT</bukkitVersion>
 		<mainClass>${project.groupId}.${project.artifactId}</mainClass>
-		<api.version>2.15</api.version>
+		<api.version>2.16</api.version>
 	</properties>
 
 	<!-- Project information -->
 	<groupId>net.milkbowl.vault</groupId>
 	<artifactId>VaultUnlocked</artifactId>
-	<version>${api.version}.1</version>
+	<version>${api.version}.0</version>
 	<name>VaultUnlocked</name>
 	<url>https://dev.bukkit.org/projects/vault</url>
 	<description>VaultUnlocked is a Chat, Permissions &amp; Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.</description>
@@ -68,6 +68,10 @@
 			<id>spigot-repo</id>
 			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
 		</repository>
+        <repository>
+            <id>codemc-creatorfromhell</id>
+            <url>https://repo.codemc.io/repository/creatorfromhell/</url>
+        </repository>
 		<repository>
 			<id>codemc-repo</id>
 			<url>https://repo.codemc.org/repository/maven-public</url>
