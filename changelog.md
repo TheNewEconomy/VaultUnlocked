@@ -147,3 +147,9 @@ If a currency contains spaces or symbols, encode them:
     - This method is a replacement for the now deprecated ```List<String> accountsMemberOf(@NotNull final String pluginName, @NotNull final UUID accountID)```
 - Added ```List<UUID> accountsWithOwnerOf(@NotNull final String pluginName, @NotNull final UUID accountID)```
     - This method is a replacement for the now deprecated ```List<String> accountsOwnedBy(@NotNull final String pluginName, @NotNull final UUID accountID)```
+
+# 2.18.0
+- Added modern Chat API! Located at: net.milkbowl.vault2.chat.ChatUnlocked
+- Added Modern Permission API! Located at: net.milkbowl.vault2.permission.PermissionUnlocked
+- Added support for 1.21.11
+- Added support for Hytale using VaultUnlocked-Hytale.

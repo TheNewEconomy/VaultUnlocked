@@ -284,8 +284,8 @@ public class Vault extends JavaPlugin {
 
         //VaultUnlocked Plugins
         final StringBuilder registeredModernPerms = new StringBuilder();
-        final Collection<RegisteredServiceProvider<net.milkbowl.vault2.permission.Permission>> perms2 = this.getServer().getServicesManager().getRegistrations(net.milkbowl.vault2.permission.Permission.class);
-        for (final RegisteredServiceProvider<net.milkbowl.vault2.permission.Permission> perm : perms2) {
+        final Collection<RegisteredServiceProvider<net.milkbowl.vault2.permission.PermissionUnlocked>> perms2 = this.getServer().getServicesManager().getRegistrations(net.milkbowl.vault2.permission.PermissionUnlocked.class);
+        for (final RegisteredServiceProvider<net.milkbowl.vault2.permission.PermissionUnlocked> perm : perms2) {
 
             if(registeredModernPerms.length() > 0) registeredModernPerms.append(", ");
             registeredModernPerms.append(perm.getProvider().getName());
@@ -301,8 +301,8 @@ public class Vault extends JavaPlugin {
 
         //VaultUnlocked Plugins
         final StringBuilder registeredModernChats = new StringBuilder();
-        final Collection<RegisteredServiceProvider<net.milkbowl.vault2.chat.Chat>> chats2 = this.getServer().getServicesManager().getRegistrations(net.milkbowl.vault2.chat.Chat.class);
-        for (final RegisteredServiceProvider<net.milkbowl.vault2.chat.Chat> chat : chats2) {
+        final Collection<RegisteredServiceProvider<net.milkbowl.vault2.chat.ChatUnlocked>> chats2 = this.getServer().getServicesManager().getRegistrations(net.milkbowl.vault2.chat.ChatUnlocked.class);
+        for (final RegisteredServiceProvider<net.milkbowl.vault2.chat.ChatUnlocked> chat : chats2) {
 
             if(registeredModernChats.length() > 0) registeredModernChats.append(", ");
             registeredModernChats.append(chat.getProvider().getName());
@@ -329,8 +329,8 @@ public class Vault extends JavaPlugin {
         }
 
         //VaultUnlocked
-        net.milkbowl.vault2.permission.Permission perm2 = null;
-        final RegisteredServiceProvider<net.milkbowl.vault2.permission.Permission> rspp2 = getServer().getServicesManager().getRegistration(net.milkbowl.vault2.permission.Permission.class);
+        net.milkbowl.vault2.permission.PermissionUnlocked perm2 = null;
+        final RegisteredServiceProvider<net.milkbowl.vault2.permission.PermissionUnlocked> rspp2 = getServer().getServicesManager().getRegistration(net.milkbowl.vault2.permission.PermissionUnlocked.class);
         if (rspp2 != null) {
             perm2 = rspp2.getProvider();
         }
@@ -342,8 +342,8 @@ public class Vault extends JavaPlugin {
         }
 
         //VaultUnlocked
-        net.milkbowl.vault2.chat.Chat chat2 = null;
-        final RegisteredServiceProvider<net.milkbowl.vault2.chat.Chat> rspc2 = getServer().getServicesManager().getRegistration(net.milkbowl.vault2.chat.Chat.class);
+        net.milkbowl.vault2.chat.ChatUnlocked chat2 = null;
+        final RegisteredServiceProvider<net.milkbowl.vault2.chat.ChatUnlocked> rspc2 = getServer().getServicesManager().getRegistration(net.milkbowl.vault2.chat.ChatUnlocked.class);
         if (rspc2 != null) {
             chat2 = rspc2.getProvider();
         }
