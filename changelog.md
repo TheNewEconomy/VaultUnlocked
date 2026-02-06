@@ -153,3 +153,8 @@ If a currency contains spaces or symbols, encode them:
 - Added Modern Permission API! Located at: net.milkbowl.vault2.permission.PermissionUnlocked
 - Added support for 1.21.11
 - Added support for Hytale using VaultUnlocked-Hytale.
+
+# 2.19.0
+
+- added canWithdraw and canDeposit methods to the Economy API.
+  - These allow consumers to check if a withdraw or deposit transaction is possible be performing it, providers may include various checks into this beyond just simply checking the balance.
