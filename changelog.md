@@ -158,3 +158,7 @@ If a currency contains spaces or symbols, encode them:
 
 - added canWithdraw and canDeposit methods to the Economy API.
   - These allow consumers to check if a withdraw or deposit transaction is possible be performing it, providers may include various checks into this beyond just simply checking the balance.
+
+# 2.19.1
+- Added supported for 26.1
+- Upgraded java requirement to 17+

@@ -12,7 +12,7 @@
 	<!-- Project information -->
 	<groupId>net.milkbowl.vault</groupId>
 	<artifactId>VaultUnlocked</artifactId>
-	<version>${api.version}.0</version>
+	<version>${api.version}.1</version>
 	<name>VaultUnlocked</name>
 	<url>https://dev.bukkit.org/projects/vault</url>
 	<description>VaultUnlocked is a Chat, Permissions &amp; Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.</description>
@@ -80,6 +80,11 @@
 			<id>placeholderapi</id>
 			<url>https://repo.extendedclip.com/releases/</url>
 		</repository>
+		<repository>
+			<id>faststats-releases</id>
+			<name>FastStats</name>
+			<url>https://repo.faststats.dev/releases</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -98,6 +103,12 @@
 			<groupId>org.bstats</groupId>
 			<artifactId>bstats-bukkit</artifactId>
 			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>dev.faststats.metrics</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>0.22.0</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>me.clip</groupId>
@@ -123,10 +134,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
+				<version>3.14.0</version>
 				<configuration>
-					<source>8</source>
-					<target>8</target>
+					<source>17</source>
+					<target>17</target>
 					<compilerArgs>
 						<arg>-parameters</arg>
 					</compilerArgs>
@@ -135,19 +146,24 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>3.6.0</version>
 				<configuration>
 					<createDependencyReducedPom>false</createDependencyReducedPom>
 					<artifactSet>
 						<includes>
 							<include>net.milkbowl.vault:VaultUnlockedAPI</include>
 							<include>org.bstats</include>
+							<include>dev.faststats.metrics:*</include>
 						</includes>
 					</artifactSet>
 					<relocations>
 						<relocation>
 							<pattern>org.bstats</pattern>
 							<shadedPattern>net.milkbowl.vault.metrics</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>dev.faststats</pattern>
+							<shadedPattern>net.milkbowl.libs.faststats</shadedPattern>
 						</relocation>
 					</relocations>
 					<transformers>

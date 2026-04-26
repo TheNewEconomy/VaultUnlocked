@@ -15,6 +15,7 @@
  */
 package net.milkbowl.vault;
 
+import dev.faststats.bukkit.BukkitMetrics;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.papi.EconomyPlaceholders;
@@ -85,6 +86,9 @@ public class Vault extends JavaPlugin {
         // Load up the Plugin metrics
         final Metrics metrics = new Metrics(this, 22252);
         findCustomData(metrics);
+
+        final BukkitMetrics.Factory fastStats = BukkitMetrics.factory().token("52b0541b7a48894156360f1d7a83e461");
+        fastStats.create(this);
 
         if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 
