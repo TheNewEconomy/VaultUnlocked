@@ -366,6 +366,15 @@ public class Vault extends JavaPlugin {
 
         final RegisteredServiceProvider<net.milkbowl.vault2.economy.Economy> econ = getServer().getServicesManager().getRegistration(net.milkbowl.vault2.economy.Economy.class);
 
+        if(econ == null) return Optional.empty();
+        return Optional.ofNullable(econ.getProvider());
+    }
+
+    public Optional<Economy> legacyProvider() {
+
+        final RegisteredServiceProvider<Economy> econ = getServer().getServicesManager().getRegistration(Economy.class);
+
+        if(econ == null) return Optional.empty();
         return Optional.ofNullable(econ.getProvider());
     }
 
