@@ -69,7 +69,7 @@ public class EconomyPlaceholders extends PlaceholderExpansion {
 
     final Optional<Economy> economyOpt = Vault.instance().modernProvider();
     if(!economyOpt.isPresent()) {
-      return null;
+      return onRequestLegacy(player, params);
     }
 
     final Economy economy = economyOpt.get();
@@ -264,6 +264,86 @@ public class EconomyPlaceholders extends PlaceholderExpansion {
     }
 
     return null;
+  }
+
+  private @Nullable String onRequestLegacy(final OfflinePlayer player, @NotNull final String params) {
+
+    final Optional<net.milkbowl.vault.economy.Economy> economyOpt = Vault.instance().legacyProvider();
+    if(!economyOpt.isPresent()) {
+      return null;
+    }
+
+    final net.milkbowl.vault.economy.Economy economy = economyOpt.get();
+    // params are split on '_', but we use the raw params to detect the <n>dp pattern
+    final String lowerParams = params.toLowerCase();
+    final String[] args = lowerParams.split("_");
+
+    try {
+
+      // All legacy balance placeholders are under "eco"
+      // %vaultunlocked_eco_balance%
+      // %vaultunlocked_eco_balance_<n>dp%
+      // %vaultunlocked_eco_balance_fixed%
+      // %vaultunlocked_eco_balance_formatted%
+      // %vaultunlocked_eco_balance_commas%
+      if(args.length >= 2 && args[0].equals("eco") && args[1].equals("balance")) {
+
+        if(player == null) {
+          return null;
+        }
+
+        final double balance = economy.getBalance(player);
+
+        // %vaultunlocked_eco_balance%
+        if(args.length == 2) {
+          return BigDecimal.valueOf(balance).toPlainString();
+        }
+
+        final String modifier = args[2];
+
+        // %vaultunlocked_eco_balance_<n>dp%  e.g. eco_balance_2dp
+        if(modifier.matches("\\d+dp")) {
+          final int dp = Integer.parseInt(modifier.substring(0, modifier.length() - 2));
+          return BigDecimal.valueOf(balance)
+                  .setScale(dp, java.math.RoundingMode.HALF_UP)
+                  .toPlainString();
+        }
+
+        switch(modifier) {
+
+          // %vaultunlocked_eco_balance_fixed%
+          case "fixed": {
+            final int digits = economy.fractionalDigits();
+            if(digits < 0) {
+              return BigDecimal.valueOf(balance).toPlainString();
+            }
+            return BigDecimal.valueOf(balance)
+                    .setScale(digits, java.math.RoundingMode.HALF_UP)
+                    .toPlainString();
+          }
+
+          // %vaultunlocked_eco_balance_formatted%
+          case "formatted":
+            return economy.format(balance);
+
+          // %vaultunlocked_eco_balance_commas%
+          case "commas": {
+            final int digits = Math.max(0, economy.fractionalDigits());
+            final java.text.DecimalFormat df = new java.text.DecimalFormat(
+                    "#,##0" + (digits > 0 ? "." + "0".repeat(digits) : ""));
+            return df.format(balance);
+          }
+
+          default:
+            return null;
+        }
+      }
+
+      return null;
+
+    } catch(final Exception ignore) {
+      return null;
+    }
   }
 
   private String booleanToYesNo(final boolean bool) {
