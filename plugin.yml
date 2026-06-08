@@ -3,7 +3,7 @@ version: 2.20.0
 description: A PR-friendly version of Vault; Where PRs are actually accepted.
 authors: [cereal, Sleaker, mung3r, creatorfromhell]
 website: https://tnemc.net
-api-version: 1.13
+api-version: 1.10
 folia-supported: true
 
 main: net.milkbowl.vault.Vault
