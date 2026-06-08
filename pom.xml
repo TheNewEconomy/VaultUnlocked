@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>pom</packaging>
 	<modules>
-		<module>VaultJava8</module>
+		<module>VaultUnlockedJava8</module>
 		<module>VaultUnlocked</module>
 	</modules>
 

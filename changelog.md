@@ -162,3 +162,17 @@ If a currency contains spaces or symbols, encode them:
 # 2.19.1
 - Added supported for 26.1
 - Upgraded java requirement to 17+
+
+# 2.20.0
+- Added support for 26.2
+- Split project into VaultUnlocked and VaultUnlockedJava8 for improved compatibility.
+- Added provider stats for VaultUnlocked on faststats.
+- Added support for VaultUnlockedAPI 2.20.
+- Fix issue with PAPI support on legacy economy providers(thanks to UsainSrht)
+
+## VaultUnlockedAPI 2.20 Changes
+*- Added MultiEconomyResponse to represent multi-account transaction results, including per-account balances, response type, amount, and error details.
+- Added transfer support to Economy, including account-to-account transfers with optional world and currency context. Transfers withdraw from the source account, deposit into the target account, and attempt to refund the source account if the deposit fails.
+- Added AsyncEconomy, an asynchronous economy API covering account, balance, transaction, transfer, and shared-account operations through CompletableFuture.
+- Added Economy#supportsAsync() and Economy#async() to allow providers to advertise and expose asynchronous economy support.
+- Added EconomyFutures, a utility wrapper that prefers AsyncEconomy when available and otherwise falls back to completed futures from synchronous Economy calls.
