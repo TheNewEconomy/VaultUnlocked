@@ -10,6 +10,8 @@ javadoc
 Vault.jar
 /Vault.iml
 /target
+**/target/
+*.iml
 
 #added by LRFLEW
 #feel free to remove

@@ -1,6 +1,11 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	<modules>
+		<module>VaultJava8</module>
+		<module>VaultUnlocked</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -11,13 +16,11 @@
 
 	<!-- Project information -->
 	<groupId>net.milkbowl.vault</groupId>
-	<artifactId>VaultUnlocked</artifactId>
-	<version>${api.version}.0</version>
-	<name>VaultUnlocked</name>
+	<artifactId>VaultUnlockedProject</artifactId>
+	<version>2.20.0</version>
+	<name>VaultUnlockedProject</name>
 	<url>https://dev.bukkit.org/projects/vault</url>
 	<description>VaultUnlocked is a Chat, Permissions &amp; Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.</description>
-
-
 
 	<!-- Organization -->
 
@@ -105,85 +108,10 @@
 			<version>3.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>dev.faststats.metrics</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>0.22.0</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>me.clip</groupId>
 			<artifactId>placeholderapi</artifactId>
 			<version>2.11.6</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<defaultGoal>clean install</defaultGoal>
-		<sourceDirectory>src/</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>${project.basedir}</directory>
-				<filtering>true</filtering>
-				<includes>
-					<include>plugin.yml</include>
-				</includes>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.14.0</version>
-				<configuration>
-					<source>17</source>
-					<target>17</target>
-					<compilerArgs>
-						<arg>-parameters</arg>
-					</compilerArgs>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.6.0</version>
-				<configuration>
-					<createDependencyReducedPom>false</createDependencyReducedPom>
-					<artifactSet>
-						<includes>
-							<include>net.milkbowl.vault:VaultUnlockedAPI</include>
-							<include>org.bstats</include>
-							<include>dev.faststats.metrics:*</include>
-						</includes>
-					</artifactSet>
-					<relocations>
-						<relocation>
-							<pattern>org.bstats</pattern>
-							<shadedPattern>net.milkbowl.vault.metrics</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>dev.faststats</pattern>
-							<shadedPattern>net.milkbowl.libs.faststats</shadedPattern>
-						</relocation>
-					</relocations>
-					<transformers>
-					        <!-- Disable PaperMC's PluginRemapper -->
-					        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-						        <manifestEntries>
-						                <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
-						        </manifestEntries>
-				                </transformer>
-					</transformers>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>

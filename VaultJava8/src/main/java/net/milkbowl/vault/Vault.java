@@ -15,8 +15,6 @@
  */
 package net.milkbowl.vault;
 
-import dev.faststats.bukkit.BukkitMetrics;
-import dev.faststats.core.data.Metric;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.papi.EconomyPlaceholders;
@@ -91,14 +89,6 @@ public class Vault extends JavaPlugin {
         // Load up the Plugin metrics
         final Metrics metrics = new Metrics(this, 22252);
         findCustomData(metrics);
-
-        final BukkitMetrics.Factory fastStats = BukkitMetrics.factory()
-                .token("52b0541b7a48894156360f1d7a83e461");
-
-        for(final Metric<?> metric : customMetrics()) {
-            fastStats.addMetric(metric);
-        }
-        fastStats.create(this);
 
         if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 
@@ -478,84 +468,6 @@ public class Vault extends JavaPlugin {
                 } catch (final Exception ignore) {}
             }
         }
-    }
-
-    private List<Metric<?>> customMetrics() {
-        final List<Metric<?>> metrics = new ArrayList<>();
-
-        //Permissions old and new
-        final RegisteredServiceProvider<Permission> rspPerm = Bukkit.getServer().getServicesManager().getRegistration(Permission.class);
-        if(rspPerm != null) {
-            metrics.add(Metric.string("legacy_permission", ()->{
-                final Permission perm = rspPerm.getProvider();
-                if(perm == null) return "None";
-                return perm.getName();
-            }));
-        }
-
-        final RegisteredServiceProvider<PermissionUnlocked> rspPerm2 = Bukkit.getServer().getServicesManager().getRegistration(PermissionUnlocked.class);
-        if (rspPerm != null) {
-
-            metrics.add(Metric.string("modern_permission", ()->{
-
-                final PermissionUnlocked perm = rspPerm2.getProvider();
-                if (perm == null) return "None";
-                return perm.getName();
-            }));
-        }
-
-        //Economy old and new
-        final RegisteredServiceProvider<Economy> rspEconomy = Bukkit.getServer().getServicesManager().getRegistration(Economy.class);
-        if(rspPerm != null) {
-            metrics.add(Metric.string("legacy_economy", ()->{
-                final Economy economy = rspEconomy.getProvider();
-                if(economy == null) return "None";
-                return economy.getName();
-            }));
-        }
-
-        final RegisteredServiceProvider<net.milkbowl.vault2.economy.Economy> rspEconomy2 = Bukkit.getServer().getServicesManager().getRegistration(net.milkbowl.vault2.economy.Economy.class);
-        if (rspPerm != null) {
-
-            metrics.add(Metric.string("modern_economy", ()->{
-
-                final net.milkbowl.vault2.economy.Economy economy = rspEconomy2.getProvider();
-                if (economy == null) return "None";
-                return economy.getName();
-            }));
-
-            metrics.add(Metric.bool("async_economy", ()->{
-
-                final net.milkbowl.vault2.economy.Economy economy = rspEconomy2.getProvider();
-                if (economy == null) return false;
-                return economy.supportsAsync();
-            }));
-        }
-
-        //Chat old and new
-        final RegisteredServiceProvider<Chat> rspChat = Bukkit.getServer().getServicesManager().getRegistration(Chat.class);
-        if(rspPerm != null) {
-            metrics.add(Metric.string("legacy_chat", ()->{
-                final Chat chat = rspChat.getProvider();
-                if(chat == null) return "None";
-                return chat.getName();
-            }));
-        }
-
-        final RegisteredServiceProvider<ChatUnlocked> rspChat2 = Bukkit.getServer().getServicesManager().getRegistration(ChatUnlocked.class);
-        if (rspPerm != null) {
-
-            metrics.add(Metric.string("modern_chat", ()->{
-
-                final ChatUnlocked chat = rspChat2.getProvider();
-                if (chat == null) return "None";
-                return chat.getName();
-            }));
-        }
-
-        metrics.add(Metric.string("game_name", ()-> "minecraft"));
-
-        return metrics;
     }
 
     public static Vault instance() {
