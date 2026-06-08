@@ -478,7 +478,6 @@ public class Vault extends JavaPlugin {
                 } catch (final Exception ignore) {}
             }
         }
-
     }
 
     private List<Metric<?>> customMetrics() {
@@ -524,6 +523,13 @@ public class Vault extends JavaPlugin {
                 if (economy == null) return "None";
                 return economy.getName();
             }));
+
+            metrics.add(Metric.bool("async_economy", ()->{
+
+                final net.milkbowl.vault2.economy.Economy economy = rspEconomy2.getProvider();
+                if (economy == null) return false;
+                return economy.supportsAsync();
+            }));
         }
 
         //Chat old and new
@@ -546,6 +552,9 @@ public class Vault extends JavaPlugin {
                 return chat.getName();
             }));
         }
+
+        metrics.add(Metric.string("game_name", ()-> "minecraft"));
+
         return metrics;
     }
 
