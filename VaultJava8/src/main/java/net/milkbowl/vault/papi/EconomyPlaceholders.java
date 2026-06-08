@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -330,7 +331,7 @@ public class EconomyPlaceholders extends PlaceholderExpansion {
           case "commas": {
             final int digits = Math.max(0, economy.fractionalDigits());
             final java.text.DecimalFormat df = new java.text.DecimalFormat(
-                    "#,##0" + (digits > 0 ? "." + "0".repeat(digits) : ""));
+                    "#,##0" + (digits > 0 ? "." + repeat('0', digits) : ""));
             return df.format(balance);
           }
 
@@ -344,6 +345,12 @@ public class EconomyPlaceholders extends PlaceholderExpansion {
     } catch(final Exception ignore) {
       return null;
     }
+  }
+
+  private static String repeat(final char ch, final int count) {
+    final char[] chars = new char[count];
+    Arrays.fill(chars, ch);
+    return new String(chars);
   }
 
   private String booleanToYesNo(final boolean bool) {
