@@ -164,7 +164,7 @@ If a currency contains spaces or symbols, encode them:
 - Upgraded java requirement to 17+
 
 # 2.20.0
-- Added support for 26.2
+- Added support for 26.1.2
 - Split project into VaultUnlocked and VaultUnlockedJava8 for improved compatibility.
 - Added provider stats for VaultUnlocked on faststats.
 - Added support for VaultUnlockedAPI 2.20.
@@ -176,3 +176,10 @@ If a currency contains spaces or symbols, encode them:
 - Added AsyncEconomy, an asynchronous economy API covering account, balance, transaction, transfer, and shared-account operations through CompletableFuture.
 - Added Economy#supportsAsync() and Economy#async() to allow providers to advertise and expose asynchronous economy support.
 - Added EconomyFutures, a utility wrapper that prefers AsyncEconomy when available and otherwise falls back to completed futures from synchronous Economy calls.
+
+## 2.20.1
+- Added support for 26.2
+- 
+## 2.20.2
+- Updated api-version in plugin yaml to be proper
+- Added backwards compatibility all the way back to craftbukkit 1.1.
