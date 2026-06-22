@@ -33,7 +33,7 @@ public class PluginEnableListener implements Listener {
   @EventHandler
   public void onEvent(final PluginEnableEvent event) {
 
-    if(event.getPlugin().getName().equalsIgnoreCase("placeholderapi")) {
+    if(event.getPlugin().getDescription().getName().equalsIgnoreCase("placeholderapi")) {
       new EconomyPlaceholders().register();
     }
   }

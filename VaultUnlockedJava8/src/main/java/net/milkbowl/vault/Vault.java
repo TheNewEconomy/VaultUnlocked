@@ -19,8 +19,6 @@ import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.papi.EconomyPlaceholders;
 import net.milkbowl.vault.permission.Permission;
-import net.milkbowl.vault2.chat.ChatUnlocked;
-import net.milkbowl.vault2.permission.PermissionUnlocked;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
@@ -43,17 +41,13 @@ import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.logging.Logger;
 
 public class Vault extends JavaPlugin {
 
     private static final String VAULT_BUKKIT_URL = "https://www.spigotmc.org/resources/vaultunlocked.117277/";
-    private Logger log;
     private String newVersionTitle = "";
     private double newVersion = 0;
     private double currentVersion = 0;
@@ -73,7 +67,6 @@ public class Vault extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        log = this.getLogger();
         currentVersionTitle = getDescription().getVersion().split("-")[0];
         currentVersion = Double.parseDouble(currentVersionTitle.replaceFirst("\\.", ""));
         // set defaults
@@ -97,7 +90,7 @@ public class Vault extends JavaPlugin {
             Bukkit.getPluginManager().registerEvents(new PluginEnableListener(), this);
         }
 
-        log.info(String.format("Enabled Version %s", getDescription().getVersion()));
+        info(String.format("Enabled Version %s", getDescription().getVersion()));
     }
 
     @Override
@@ -409,14 +402,15 @@ public class Vault extends JavaPlugin {
             final JSONArray array = (JSONArray) JSONValue.parse(response);
 
             if (array.isEmpty()) {
-                this.getLogger().warning("No files found, or Feed URL is bad.");
+                warning("No files found, or Feed URL is bad.");
                 return currentVersion;
             }
             // Pull the last version from the JSON
             newVersionTitle = ((String) ((JSONObject) array.get(array.size() - 1)).get("name")).replace("Vault", "").trim();
             return Double.parseDouble(newVersionTitle.replaceFirst("\\.", "").trim());
         } catch (final Exception ignore) {
-            log.info("There was an issue attempting to check for the latest version.");
+            info("There was an issue attempting to check for the latest version.");
+            info("There was an issue attempting to check for the latest version.");
         }
         return currentVersion;
     }
@@ -472,5 +466,21 @@ public class Vault extends JavaPlugin {
 
     public static Vault instance() {
         return instance;
+    }
+
+    private void warning(final String message) {
+        try {
+            this.getLogger().warning(message);
+        } catch(final NoSuchMethodError ignore) {
+            System.out.println("[VaultUnlocked] WARNING: " + message);
+        }
+    }
+
+    private void info(final String message) {
+        try {
+            this.getLogger().info(message);
+        } catch(final NoSuchMethodError ignore) {
+            System.out.println("[VaultUnlocked] INFO: " + message);
+        }
     }
 }
