@@ -183,3 +183,6 @@ If a currency contains spaces or symbols, encode them:
 ## 2.20.2
 - Updated api-version in plugin yaml to be proper
 - Added backwards compatibility all the way back to craftbukkit 1.1.
+
+## 2.20.3
+- Added support for 26.3
